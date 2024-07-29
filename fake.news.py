@@ -1,12 +1,15 @@
 import pickle
 import streamlit as st
 import re
-import ntlk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+import nltk
+
+# Download NLTK stopwords if not already downloaded
+nltk.download('stopwords')
 
 # Load the model and vectorizer
-model = pickle.load(open('fake_news_model.sav', 'rb'))
+model = pickle.load(open('news_model.sav', 'rb'))
 vectorizer = pickle.load(open('vectorizer.sav', 'rb'))
 
 # Initialize stemmer
