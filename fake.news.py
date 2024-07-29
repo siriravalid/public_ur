@@ -1,56 +1,27 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun May  8 21:01:15 2022
-
-@author: siddhardhan
-"""
-
 import pickle
 import streamlit as st
 
-# loading the saved model
-diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
+# Load the saved model
+model = pickle.load(open('fake_news_model.sav', 'rb'))
 
-# page title
-st.title('Diabetes Prediction using ML')
+# Page title
+st.title('Fake News Detection')
 
-# getting the input data from the user
-col1, col2, col3 = st.columns(3)
+# Input field for news article
+news_text = st.text_area("Enter the news article text here:")
 
-with col1:
-    Pregnancies = st.text_input('Number of Pregnancies')
+# Predict button
+if st.button('Predict'):
+    # Transform the input text (Assuming preprocessing was done in the model training)
+    # Placeholder for transformation function
+    # Note: Actual transformation might be needed here depending on how the model was trained
 
-with col2:
-    Glucose = st.text_input('Glucose Level')
-
-with col3:
-    BloodPressure = st.text_input('Blood Pressure value')
-
-with col1:
-    SkinThickness = st.text_input('Skin Thickness value')
-
-with col2:
-    Insulin = st.text_input('Insulin Level')
-
-with col3:
-    BMI = st.text_input('BMI value')
-
-with col1:
-    DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
-
-with col2:
-    Age = st.text_input('Age of the Person')
-
-# code for Prediction
-diab_diagnosis = ''
-
-# creating a button for Prediction
-if st.button('Diabetes Test Result'):
-    diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
-
-    if (diab_prediction[0] == 1):
-        diab_diagnosis = 'The person is diabetic'
+    # Predict
+    # You may need to preprocess the text if required, similar to how it was done during training
+    # Assuming the model is able to handle raw input
+    prediction = model.predict([news_text])
+    
+    if prediction[0] == 1:
+        st.error("The news is Fake")
     else:
-        diab_diagnosis = 'The person is not diabetic'
-
-st.success(diab_diagnosis)
+        st.success("The news is Real")
