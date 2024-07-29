@@ -2,7 +2,7 @@ import pickle
 import streamlit as st
 
 # Load the model
-model = pickle.load(open('model.sav', 'rb'))
+model = pickle.load(open('fake_news.model.sav', 'rb'))
 
 # Streamlit page title
 st.title('Fake News Detection')
